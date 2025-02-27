@@ -1,14 +1,15 @@
 import os
-from pathlib import Path
 
 class Config:
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    MODEL_PATH = os.path.join(BASE_DIR, 'models', 'best.pt') 
-    print(f"Model path: {MODEL_PATH}") # Update to YOLOv8 model
-    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
-    print(f"upload path: {UPLOAD_FOLDER}")
+    # Direct paths to the model and upload folder
+    MODEL_PATH = "C:/Users/DELL PC/Downloads/dataset/kemi/models/best.pt"
+    UPLOAD_FOLDER = "C:/Users/DELL PC/Downloads/dataset/kemi/uploads"
+    
+    print(f"Model path: {MODEL_PATH}")  # Update to YOLOv8 model
+    print(f"Upload path: {UPLOAD_FOLDER}")
     
     # CSV file paths
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     ANIMAL_DATA = os.path.join(BASE_DIR, 'data', 'Animal.csv')
     POPULATION_DATA = os.path.join(BASE_DIR, 'data', 'Population_by_year.csv')
     ENDANGERED_SPECIES_DATA = os.path.join(BASE_DIR, 'data', 'Endangered_Species.csv')

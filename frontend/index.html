@@ -106,6 +106,7 @@
     let populationChart = null;
 
     function handleFileUpload(event) {
+      event.preventDefault()
       const file = event.target.files[0];
       if (!file) return;
 
