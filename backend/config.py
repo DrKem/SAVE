@@ -2,8 +2,8 @@ import os
 
 class Config:
     # Direct paths to the model and upload folder
-    MODEL_PATH = "C:/Users/DELL PC/Downloads/dataset/kemi/models/best.pt"
-    UPLOAD_FOLDER = "C:/Users/DELL PC/Downloads/dataset/kemi/uploads"
+    MODEL_PATH = "/models/best.pt"
+    UPLOAD_FOLDER = "/uploads"
     
     print(f"Model path: {MODEL_PATH}")  # Update to YOLOv8 model
     print(f"Upload path: {UPLOAD_FOLDER}")
