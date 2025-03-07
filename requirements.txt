@@ -6,3 +6,6 @@ uvicorn
 python-multipart
 pandas
 ultralytics
+streamlit
+flask
+flask-cors
