@@ -9,3 +9,4 @@ ultralytics
 streamlit
 flask
 flask-cors
+gunicorn
