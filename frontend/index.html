@@ -105,10 +105,8 @@
     // Store chart instance to destroy if needed
     let populationChart = null;
 
-    // Environment variable URL
-    const API_BASE_URL = process.env.NODE_ENV === 'development'
-        ? 'http://localhost:5000' // Development URL
-        : process.env.REACT_APP_API_BASE_URL; // Production URL
+     // **IMPORTANT: Replace with your actual deployed server URL**
+    const SERVER_BASE_URL = "https://save-a29a.onrender.com/"; // Or "http://localhost:5000" for local testing
 
     function handleFileUpload(event) {
       event.preventDefault()
@@ -183,7 +181,7 @@
       });
 
       // Send the request
-      xhr.open('POST', `${API_BASE_URL}/analyze-species`, true); // Changed line
+      xhr.open('POST', `${SERVER_BASE_URL}/analyze-species`, true); // Changed line
       xhr.send(formData);
     }
 
