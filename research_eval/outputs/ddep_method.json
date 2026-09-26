@@ -1,0 +1,8 @@
+{
+  "formula": "D_dep = alpha*DeltaF + (1-alpha)*DeltaC",
+  "DeltaF": "((F_t0-F_tn)/F_t0)*100",
+  "DeltaC": "((C_tn-C_t0)/C_t0)*100",
+  "C": "HHI across matched country locations = sum((count_i/F_t)^2)",
+  "endpoint_rule": "longest interval with >=2 common country locations at both endpoints; aggregate/world rows excluded",
+  "important": "Country concentration is an available-data spatial proxy, not a camera-coordinate clustering statistic. Historical near-zero baselines can produce very large percentage changes; interpret those rows with care."
+}
