@@ -1,0 +1,86 @@
+[
+  {
+    "species": "Elephant(African)",
+    "baseline_year": 2007,
+    "final_year": 2015,
+    "common_locations": 24,
+    "F_t0": 430535,
+    "F_tn": 400516,
+    "C_t0": 0.20727333114403146,
+    "C_tn": 0.1800748111372726,
+    "delta_F_pct": 6.97248771876851,
+    "delta_C_pct": -13.122054755736501
+  },
+  {
+    "species": "Rhino(Sumatran)",
+    "baseline_year": 2007,
+    "final_year": 2018,
+    "common_locations": 2,
+    "F_t0": 280,
+    "F_tn": 59,
+    "C_t0": 0.5408163265306123,
+    "C_tn": 1,
+    "delta_F_pct": 78.92857142857143,
+    "delta_C_pct": 84.90566037735847
+  },
+  {
+    "species": "Rhino(Black)",
+    "baseline_year": 1980,
+    "final_year": 2017,
+    "common_locations": 12,
+    "F_t0": 10730,
+    "F_tn": 5495,
+    "C_t0": 0.2321434620338756,
+    "C_tn": 0.28123775357033154,
+    "delta_F_pct": 48.788443616029824,
+    "delta_C_pct": 21.148255094641367
+  },
+  {
+    "species": "Rhino(Javan)",
+    "baseline_year": 2007,
+    "final_year": 2018,
+    "common_locations": 2,
+    "F_t0": 50,
+    "F_tn": 66,
+    "C_t0": 0.8200000000000001,
+    "C_tn": 1,
+    "delta_F_pct": -32,
+    "delta_C_pct": 21.951219512195113
+  },
+  {
+    "species": "Rhino(Greater One-Horned Rhino)",
+    "baseline_year": 1986,
+    "final_year": 2018,
+    "common_locations": 3,
+    "F_t0": 1711,
+    "F_tn": 3588,
+    "C_t0": 0.6559081898985524,
+    "C_tn": 0.7036742380460572,
+    "delta_F_pct": -109.70192869666862,
+    "delta_C_pct": 7.282428986729483
+  },
+  {
+    "species": "Rhino(Southern white)",
+    "baseline_year": 1895,
+    "final_year": 2017,
+    "common_locations": 8,
+    "F_t0": 20,
+    "F_tn": 18038,
+    "C_t0": 1,
+    "C_tn": 0.7551284871114081,
+    "delta_F_pct": -90090,
+    "delta_C_pct": -24.487151288859188
+  },
+  {
+    "species": "Rhino(Northern white)",
+    "baseline_year": 1960,
+    "final_year": 1998,
+    "common_locations": 3,
+    "F_t0": 2230,
+    "F_tn": 25,
+    "C_t0": 0.4683182851052707,
+    "C_tn": 1,
+    "delta_F_pct": 98.87892376681614,
+    "delta_C_pct": 113.52999270041644
+  }
+]
