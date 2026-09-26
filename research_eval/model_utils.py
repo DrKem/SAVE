@@ -18,7 +18,7 @@ def gt_for_image(path:Path):
 
 def build_faster_rcnn(num_classes:int,pretrained:bool=True):
     weights=FasterRCNN_ResNet50_FPN_V2_Weights.DEFAULT if pretrained else None
-    model=fasterrcnn_resnet50_fpn_v2(weights=weights)
+    model=fasterrcnn_resnet50_fpn_v2(weights=weights, weights_backbone=None if not pretrained else None)
     in_features=model.roi_heads.box_predictor.cls_score.in_features
     model.roi_heads.box_predictor=FastRCNNPredictor(in_features,num_classes+1)
     return model
