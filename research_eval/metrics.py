@@ -35,22 +35,40 @@ def class_ap(records,cls,iou_thr):
     tp=np.cumsum(tp);fp=np.cumsum(fp);rec=tp/n_gt;prec=tp/np.maximum(tp+fp,1)
     return _ap101(rec,prec)
 
-def macro_recall(records,score_thr=.25,iou_thr=.5):
-    classes=sorted({g["class_id"] for r in records for g in r["ground_truth"]}); vals=[]
+def _macro_precision_recall(records,score_thr=.25,iou_thr=.5):
+    classes=sorted({g["class_id"] for r in records for g in r["ground_truth"]})
+    precisions=[];recalls=[]
     for cls in classes:
-        gt_total=0;tp=0
+        gt_total=0;tp=0;fp=0
         for r in records:
-            g=[x["box"] for x in r["ground_truth"] if x["class_id"]==cls];gt_total+=len(g);used=set()
-            ps=sorted([p for p in r["predictions"] if p["class_id"]==cls and p["score"]>=score_thr],key=lambda x:x["score"],reverse=True)
+            g=[x["box"] for x in r["ground_truth"] if x["class_id"]==cls]
+            gt_total+=len(g);used=set()
+            ps=sorted(
+                [p for p in r["predictions"] if p["class_id"]==cls and p["score"]>=score_thr],
+                key=lambda x:x["score"],reverse=True
+            )
             for p in ps:
-                best=-1;bv=0
+                best=-1;bv=0.0
                 for j,b in enumerate(g):
                     if j in used:continue
                     v=iou(p["box"],b)
                     if v>bv:bv=v;best=j
-                if best>=0 and bv>=iou_thr:used.add(best);tp+=1
-        if gt_total:vals.append(tp/gt_total)
-    return float(np.mean(vals)) if vals else math.nan
+                if best>=0 and bv>=iou_thr:
+                    used.add(best);tp+=1
+                else:
+                    fp+=1
+        if gt_total:
+            recalls.append(tp/gt_total)
+            precisions.append(tp/(tp+fp) if (tp+fp) else 0.0)
+    precision=float(np.mean(precisions)) if precisions else math.nan
+    recall=float(np.mean(recalls)) if recalls else math.nan
+    return precision,recall
+
+def macro_precision(records,score_thr=.25,iou_thr=.5):
+    return _macro_precision_recall(records,score_thr,iou_thr)[0]
+
+def macro_recall(records,score_thr=.25,iou_thr=.5):
+    return _macro_precision_recall(records,score_thr,iou_thr)[1]
 
 def evaluate(records):
     classes=sorted({g["class_id"] for r in records for g in r["ground_truth"]})
@@ -60,4 +78,13 @@ def evaluate(records):
         aps=[class_ap(records,c,t) for c in classes];aps=[x for x in aps if not math.isnan(x)]
         by_iou.append(float(np.mean(aps)) if aps else math.nan)
     lat=[float(r["latency_ms"]) for r in records if r.get("latency_ms") is not None]
-    return {"mAP50":by_iou[0],"mAP50_95":float(np.mean(by_iou)),"recall":macro_recall(records),"latency_ms":float(np.mean(lat)) if lat else math.nan,"n_images":len(records),"n_classes_gt":len(classes)}
+    precision,recall=_macro_precision_recall(records)
+    return {
+        "precision":precision,
+        "recall":recall,
+        "mAP50":by_iou[0],
+        "mAP50_95":float(np.mean(by_iou)),
+        "latency_ms":float(np.mean(lat)) if lat else math.nan,
+        "n_images":len(records),
+        "n_classes_gt":len(classes),
+    }
