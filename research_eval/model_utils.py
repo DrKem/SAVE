@@ -16,11 +16,14 @@ def gt_for_image(path:Path):
         a,b,c,d=x["box_norm"];out.append({"class_id":x["class_id"],"box":[a*w,b*h,c*w,d*h]})
     return out,w,h
 
-def build_faster_rcnn(num_classes:int,pretrained:bool=True):
+def build_faster_rcnn(num_classes:int,pretrained:bool=True,imgsz:int=640):
     weights=FasterRCNN_ResNet50_FPN_V2_Weights.DEFAULT if pretrained else None
-    model=fasterrcnn_resnet50_fpn_v2(weights=weights, weights_backbone=None if not pretrained else None)
+    model=fasterrcnn_resnet50_fpn_v2(weights=weights, weights_backbone=None)
     in_features=model.roi_heads.box_predictor.cls_score.in_features
     model.roi_heads.box_predictor=FastRCNNPredictor(in_features,num_classes+1)
+    # Harmonize the detector's internal resize with the 640px benchmark protocol.
+    model.transform.min_size=(int(imgsz),)
+    model.transform.max_size=int(imgsz)
     return model
 
 def image_tensor(path:Path):
